@@ -1,5 +1,5 @@
 # BPQ-MHeardBeacon
-MHeard beacon for LinBPQ
+MHeard beacon for LinBPQ - Alpha release
 
 X86 & Pi versions
 
@@ -18,3 +18,8 @@ or
 73s
 Steve
 g7taj@gb7bex.#38.gbr.eu
+
+Version History
+
+v0.2a - INI implimented for settings
+v0.1a - First working version
