@@ -1,0 +1,49 @@
+#!/usr/bin/expect -f
+
+set username YOURCALLSIGN
+set passwd YOURPASSWORD
+set portnum BPQPORTNUMBER
+
+set timeout 4
+
+#spawn ./nodeconnect.sh
+spawn telnet 127.0.0.1 8010
+
+
+expect {
+    timeout {puts "timed out"; exit}
+    "user:"
+}
+send -- "$username\r"
+
+
+expect {
+    timeout {puts "timed out"; exit}
+    "password:"
+}
+send -- "$passwd\r"
+
+expect {
+    timeout {puts "timed out"; exit}
+     "*Press ? For list of commands*"
+}
+send -- "v\r"
+
+expect {
+    timeout {puts "timed out"; exit}
+    "*\} Version*"
+}
+send -- "mhv $portnum\rv\r"
+
+set ::file [ open mhlist.txt w ]
+
+expect {
+    timeout {puts "timed out"; exit}
+    "*\} Version*"
+
+}
+puts -nonewline $::file $expect_out(buffer)
+
+close $::file
+
+send -- "b\r"
